@@ -16,6 +16,7 @@ echo '----------------'
 echo 'bundle exec rake'
 bundle exec rake
 
-echo '---------------------------'
-echo 'bundle exec rake jasmine:ci'
-bundle exec rake jasmine:ci
+echo '--------------'
+echo 'Jasmine tests:'
+echo 'Remember to run the jasmine.sh script'
+echo 'to run the Jasmine server.'
