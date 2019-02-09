@@ -67,6 +67,9 @@ group :test, :development do
   gem 'rspec-collection_matchers'
   gem 'awesome_print'
   gem 'rails-controller-testing', require: false
+  gem 'brakeman', '4.4.0'
+  gem 'bundler-audit', '0.6.1'
+  gem 'gemsurance', '0.9.0'
 end
 
 group :test do
