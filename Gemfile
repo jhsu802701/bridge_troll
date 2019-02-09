@@ -57,6 +57,8 @@ group :development do
   gem 'binding_of_caller'
   gem 'byebug'
   gem 'listen'
+  gem 'railroady', '1.5.3' # Generates block diagrams
+  gem 'rails-erd', '1.5.2' # Generates block diagrams
 end
 
 group :test, :development do
