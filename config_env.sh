@@ -111,3 +111,47 @@ read GOOGLE_SECRET
 
 echo GOOGLE_OAUTH_KEY=$GOOGLE_ID >> .env
 echo GOOGLE_OAUTH_SECRET=$GOOGLE_SECRET >> .env
+
+echo '****************************'
+echo 'Twitter OmniAuth credentials'
+echo '****************************'
+echo '---------------------------------------------------'
+echo 'Follow these steps to get your Twitter credentials:'
+echo '1. Log into your Twitter account.'
+echo '2. Go to https://developer.twitter.com/en/apps .'
+echo '   If you have not already done so, click on "Apply"'
+echo '   to apply for Twitter developer access.'
+echo '3. If you already have Twitter developer access, click on "Apps".'
+echo '4. If you already created an OAuth app, click on its'
+echo '   corresponding "Details" button.'
+echo '   Make sure that the '
+echo '   Get your Twitter API Key and API Secret Key (NOT access tokens).'
+echo '   Make sure that the port number in your app domain URL'
+echo '   is correct for your Docker container.'
+echo '   If necessary, add the appropriate URL.'
+echo '   Then skip ahead to enter your credentials.'
+echo '5. If you did not already create the OAuth app,' 
+echo '   click on "Create an App".'
+echo '6. Enter "bridge_troll" for the app name'.
+echo '7. Enter the following description:'
+echo '   Local version of the RailsBridge Bridge Troll site'
+echo '8. For the website URL, enter "https://www.bridgetroll.org/".'
+echo '9. Toggle on "Enable Sign in with Twitter".'
+echo '10. For the callback URL, enter "http://localhost:3000/users/auth/twitter/callback".'
+echo '    NOTE: If you are using a non-zero offset for the port numbers,'
+echo '    the port number will be different from 3000.'
+echo '11. Enter the following description on how the app will be used:'
+echo '    This app will be used for working on the RailsBridge Bridge Troll site'
+echo '    at https://www.bridgetroll.org/.'
+echo '12. Click on "Create".  If all goes well, your'
+echo '    App ID and App Secret are now provided.'
+echo
+echo '++++++++++++++++++++++++++'
+echo 'Enter the Twitter API Key:'
+read TWITTER_ID
+
+echo 'Enter the API Secret Key:'
+read TWITTER_SECRET
+
+echo TWITTER_OAUTH_KEY=$TWITTER_ID >> .env
+echo TWITTER_OAUTH_SECRET=$TWITTER_SECRET >> .env
