@@ -17,6 +17,8 @@ New? Keep reading this, and then read the [contributor guidelines](CONTRIBUTING.
 * The staging server lives at [bridgetroll-staging.herokuapp.com](http://bridgetroll-staging.herokuapp.com/)
 * The continuous integration server is at [travis-ci.org/railsbridge/bridge_troll](http://travis-ci.org/railsbridge/bridge_troll)
 
+For details on how production and staging are setup, see the [deployment docs](doc/deploy.md).
+
 ### Features & Bugs
 * We use [GitHub Issues](https://github.com/railsbridge/bridge_troll/issues?state=open) for tracking bugs and features.
  * Issues marked as [Help Wanted](https://github.com/railsbridge/bridge_troll/issues?q=is%3Aissue+is%3Aopen+label%3A%22Help+Wanted%22) are ready to go, so pick one up!
@@ -67,7 +69,8 @@ Pro-tip: Confirming Users Locally
 This project has many tests that you should run before submitting a pull request, even if it's just a simple text change. You will need to install PhantomJS to run the tests. On OSX with Homebrew, try
 ```
 brew update
-brew install phantomjs
+brew tap homebrew/cask
+brew cask install phantomjs
 ```
 
 If you are on a Ubuntu-based linux distribution, you can try
@@ -86,7 +89,7 @@ Seed data refers to the initial data provided with the site for training, testin
 
 `rake db:seed` will create a sample event (called 'Seeded Test Event'), organized by a sample user, with many more sample user volunteers and students.
 
-All the created users have easyish-to-remember logins, so a great way to test out organizer functionality is to load the seeds and log in as `organizer@example.com` with the password `password`.
+All the created users have easyish-to-remember logins, so a great way to test out organizer functionality is to load the seeds and log in as `organizer@example.com` with the password `password` (it will always be 'password'). 
 
 Doing `rake db:seed` again will destroy all those sample persons and create the event again. The exact details of what is created can be found in `seed_event.rb`.
 
@@ -107,7 +110,7 @@ We have created a living style guide to keep track of HTML components and their 
 
 We're still working on adding every element to the page, so if you see missing components, add it to the erb template ([style_guide.html.erb](app/views/static_pages/style_guide.html.erb))
 
-##Additional Services
+## Additional Services
 
 The following setup is only required if you are developing for these specific features.
 

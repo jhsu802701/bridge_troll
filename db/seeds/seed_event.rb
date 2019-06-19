@@ -22,7 +22,7 @@ module Seeder
       role: Role::VOLUNTEER,
       subject_experience: Faker::Lorem.sentence,
       teaching_experience: Faker::Lorem.sentence,
-      job_details: Faker::Name.title
+      job_details: Faker::Job.title
     }.merge(options)
 
     rsvp = Rsvp.new(rsvp_params)
@@ -36,7 +36,7 @@ module Seeder
     rsvp_params = {
       role: Role::STUDENT,
       operating_system: OperatingSystem.all.sample,
-      job_details: Faker::Name.title
+      job_details: Faker::Job.title
     }.merge(options)
 
     rsvp = Rsvp.new(rsvp_params)
@@ -244,6 +244,71 @@ module Seeder
     event.event_sessions << EventSession.new(name: 'Workshop', starts_at: 65.days.from_now, ends_at: 66.days.from_now)
 
     event.save!
+
+    organizer = find_or_create_user('organizer@example.com')
+    event.organizers << organizer
+
+    volunteer = find_or_create_user("volunteer1@example.com")
+    create_volunteer_rsvp(event: event,
+                          user: volunteer,
+                          volunteer_assignment: VolunteerAssignment::UNASSIGNED,
+                          class_level: 1,
+                          teaching: true,
+                          taing: true)
+
+    event
+  end
+
+  def self.seed_past_event
+    old_event = Event.where(title: 'Seeded Past Event').first
+    destroy_event(old_event) if old_event.present?
+
+    organization = Organization.find_or_create_by(name: 'RailsBridge')
+    region = Region.find_or_create_by(name: 'San Francisco')
+    chapter = Chapter.find_or_create_by(name: 'RailsBridge San Francisco', organization: organization)
+
+    location = Location.find_or_create_by(
+      region_id: region.id,
+      name: "Sutro Tower",
+      address_1: "Sutro Tower",
+      city: "San Francisco",
+      state: "CA",
+      zip: "94131",
+      gmaps: true)
+
+    session_location = Location.find_or_create_by(
+      region_id: region.id,
+      name: "Ferry Building",
+      address_1: "Ferry Building",
+      city: "San Francisco",
+      state: "CA",
+      zip: "94111",
+      gmaps: true)
+
+    event = Event.new(
+      title: 'Seeded Past Event',
+      student_rsvp_limit: 15,
+      time_zone: 'Pacific Time (US & Canada)',
+      course: Course.find_by(name: "RAILS"),
+      location: location,
+      chapter: chapter,
+      current_state: :published,
+      target_audience: 'women',
+      details: <<-DETAILS.strip_heredoc
+        This is an example of an event that takes place in multiple locations!
+      DETAILS
+    )
+
+    installfest = EventSession.new(name: 'Installfest', starts_at: 60.days.from_now, ends_at: 61.days.from_now)
+    workshop = EventSession.new(name: 'Workshop', starts_at: 62.days.from_now, ends_at: 63.days.from_now)
+
+    event.event_sessions << installfest
+    event.event_sessions << workshop
+
+    event.save!
+
+    installfest.update_attributes(starts_at: 61.days.ago, ends_at: 60.days.ago)
+    workshop.update_attributes(starts_at: 60.days.ago, ends_at: 59.days.ago)
 
     organizer = find_or_create_user('organizer@example.com')
     event.organizers << organizer
